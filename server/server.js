@@ -38,8 +38,6 @@ var sendRequest = function(ipAddress, type, action, command, options) {
     </s:Body> \
    </s:Envelope>";
 
-   console.log(command + "\n");
-
    var postRequest = {
     host: ipAddress,
     path: url,
@@ -52,11 +50,13 @@ var sendRequest = function(ipAddress, type, action, command, options) {
     }
   };
 
+  console.log(postRequest.host+":"+postRequest.port + postRequest.path + " " + action);
+
   var self = this;
   if(options !== undefined) {
     self.callback = options['callback'];
   } else {
-    self.callback = function(data){ console.log(data) };
+    self.callback = function(data){ };
   }
 
   if (!ipAddress.match(/^\d/)) {
