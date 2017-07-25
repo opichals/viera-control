@@ -25,8 +25,7 @@ function showIpConfig() {
     $(".js-ip-save").on("click", function(e) {
         e.preventDefault();
         var ipAddress = $('#ipField').val()
-        var ipRegExp = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
-        if(ipRegExp.test(ipAddress)) {
+        if(ipAddress) {
             localStorage.setItem('ipAddress', ipAddress);
             $("#ipModal").modal("hide");
             start();

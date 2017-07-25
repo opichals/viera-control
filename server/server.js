@@ -3,6 +3,8 @@ var application_root = __dirname,
   express = require('express'),
   path = require('path');
 
+var ssdp = require('./ssdp');
+
 // Create server
 var vieraControl = express();
 
@@ -57,9 +59,20 @@ var sendRequest = function(ipAddress, type, action, command, options) {
     self.callback = function(data){ console.log(data) };
   }
 
+  if (!ipAddress.match(/^\d/)) {
+     ssdp(ipAddress, function(device) {
+       postRequest.host = device.address;
+       httpRequest(postRequest, body, self.callback);
+     });
+  } else {
+       httpRequest(postRequest, body, self.callback);
+  }
+}
+
+function httpRequest(postRequest, body, cb) {
   var req = http.request(postRequest, function(res) {
     res.setEncoding('utf8');
-    res.on('data', self.callback);
+    res.on('data', cb);
   });
 
   req.on('error', function(e) {

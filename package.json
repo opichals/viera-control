@@ -3,8 +3,9 @@
   "version": "0.0.7",
   "private": true,
   "dependencies": {
+    "coffee-script": "1.6.3",
     "express": "3.x",
-    "coffee-script": "1.6.3"
+    "ssdp-js": "^1.0.1"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
