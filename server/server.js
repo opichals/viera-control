@@ -112,5 +112,6 @@ require('./api')(vieraControl, sendRequest);
 
 
 // Run server
-vieraControl.listen(3000);
-console.log('Listening on port 3000');
+const port = process.env.PORT || 8080;
+vieraControl.listen(port);
+console.log('Listening on port '+port);

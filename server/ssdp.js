@@ -4,7 +4,7 @@ var devices = {};
 function findDevices(name, cb) {
   var browser = new Browser();
   browser.onDevice(function(device) {
-    console.log("DLNA device ", device.name, device.address, device);
+    console.log("DLNA device ", device);
     devices[device.name] = device;
     if (device.name === name && cb) {
       cb(device);
