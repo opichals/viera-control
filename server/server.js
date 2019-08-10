@@ -67,6 +67,8 @@ var sendRequest = function(ipAddress, type, action, command, options) {
   } else {
        httpRequest(postRequest, body, self.callback);
   }
+
+  return true;
 }
 
 function httpRequest(postRequest, body, cb) {

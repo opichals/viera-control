@@ -41,7 +41,7 @@ function start() {
         $(this).on("click", function(e) {
             e.preventDefault();
             $(this).blur();
-            $.post("/tv/" + ipAddr + "/action", {"action": $(this).data("action")});
+            $.post("./tv/" + ipAddr + "/action", {"action": $(this).data("action")});
             $("ipModal").modal("hide");
         });
     });
