@@ -102,7 +102,6 @@ vieraControl.post('/tv/:ip/action', function(req, res) {
 });
 
 vieraControl.get('/tv/:ip/volume', function(req, res) {
-  var self = this;
   sendRequest(req.params.ip, 'render', 'GetVolume', '<InstanceID>0</InstanceID><Channel>Master</Channel>',
     {
       callback: function(data){
@@ -114,6 +113,31 @@ vieraControl.get('/tv/:ip/volume', function(req, res) {
     }
   );
 });
+
+vieraControl.get('/tv/:ip/state', function(req, res) {
+  const data = {};
+
+  function cb(key, value) {
+    data[key] = value;
+
+    if (Object.keys(data).length === 2) {
+      res.end(JSON.stringify(data));
+    }
+  };
+
+  sendRequest(req.params.ip, 'render', 'GetVolume', '<InstanceID>0</InstanceID><Channel>Master</Channel>', {
+    callback: function(data) {
+      var match = /<CurrentVolume>(\d*)<\/CurrentVolume>/gm.exec(data);
+      cb('volume', match ? match[1] : 0);
+    }
+  });
+  sendRequest(req.params.ip, 'event', 'X_ScreenState', '', {
+    callback: function(data) {
+      cb('screenstate', data);
+    }
+  });
+});
+
 
 // Require the API
 // Comment this if you don't want to use API

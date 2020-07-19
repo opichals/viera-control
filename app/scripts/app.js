@@ -47,13 +47,13 @@ function start() {
     });
 
     setInterval((function() {
-        $.get("tv/" + ipAddr + "/volume", function(data) {
-            $(".vol").text("Volume - " + data);
-        });
-        $.get("tv/" + ipAddr + "/power/state", function(data) {
-            var pwr = $(".pwr");
+        $.get("tv/" + ipAddr + "/state", function(dataJson) {
+            var data = JSON.parse(dataJson);
 
-            if (data === 'off') {
+            $(".vol").text("Volume - " + data.volume);
+
+            var pwr = $(".pwr");
+            if (data.screenstate === 'off') {
                pwr.removeClass('btn-success');
                pwr.addClass('btn-danger');
             } else {
