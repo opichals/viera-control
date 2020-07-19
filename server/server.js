@@ -50,7 +50,7 @@ var sendRequest = function(ipAddress, type, action, command, options) {
     }
   };
 
-  console.log(postRequest.host+":"+postRequest.port + postRequest.path + " " + action);
+  console.log(postRequest.host+":"+postRequest.port + postRequest.path + " " + action + ": " + command);
 
   var self = this;
   if(options !== undefined) {
@@ -79,6 +79,7 @@ function httpRequest(postRequest, body, cb) {
 
   req.on('error', function(e) {
      console.log('ERROR: ' + e);
+     ssdp.flushCache();
      return false;
   });
 
