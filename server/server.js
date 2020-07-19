@@ -4,6 +4,7 @@ var application_root = __dirname,
   path = require('path');
 
 var ssdp = require('./ssdp');
+var upnpRequest = require('./upnp');
 
 // Create server
 var vieraControl = express();
@@ -27,6 +28,9 @@ var sendRequest = function(ipAddress, type, action, command, options) {
   } else if (type == "render") {
     url = "/dmr/control_0";
     urn = "schemas-upnp-org:service:RenderingControl:1";
+  } else if (type == "event") {
+    urn = "schemas-upnp-org:event-1-0";
+    url = "/nrc/event_0";
   }
 
    var body = "<?xml version='1.0' encoding='utf-8'?> \
@@ -59,13 +63,15 @@ var sendRequest = function(ipAddress, type, action, command, options) {
     self.callback = function(data){ };
   }
 
+  var requestHandler = type === "event" ? upnpRequest : httpRequest;
+
   if (!ipAddress.match(/^\d/)) {
      ssdp(ipAddress, function(device) {
        postRequest.host = device.address;
-       httpRequest(postRequest, body, self.callback);
+       requestHandler(postRequest, body, self.callback);
      });
   } else {
-       httpRequest(postRequest, body, self.callback);
+       requestHandler(postRequest, body, self.callback);
   }
 
   return true;

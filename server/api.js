@@ -5,6 +5,10 @@
     //-------------
     // Basic commands
     //-------------
+    vieraControl.get('/tv/:ip/power/state', function(req, res) {
+      sendRequest(req.params.ip, 'event', 'X_ScreenState', '', { callback: data => res.end(data) });
+    });
+
     vieraControl.get('/tv/:ip/power', function(req, res) {
       sendRequest(req.params.ip, 'command', 'X_SendKey', '<X_KeyEvent>NRC_POWER-ONOFF</X_KeyEvent>');
       res.end();

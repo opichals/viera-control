@@ -50,5 +50,16 @@ function start() {
         $.get("tv/" + ipAddr + "/volume", function(data) {
             $(".vol").text("Volume - " + data);
         });
+        $.get("tv/" + ipAddr + "/power/state", function(data) {
+            var pwr = $(".pwr");
+
+            if (data === 'off') {
+               pwr.removeClass('btn-success');
+               pwr.addClass('btn-danger');
+            } else {
+               pwr.addClass('btn-success');
+               pwr.removeClass('btn-danger');
+            }
+        });
     }), 1000);
 };
