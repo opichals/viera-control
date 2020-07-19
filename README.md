@@ -49,7 +49,9 @@ All API calls except `/tv/<ip_address>/action` are GET
 
 | URL             |                  |
 |-----------------|------------------|
-| `/tv/<ip_address>/power`     | Turn off tv      |
+| `/tv/<ip_address>/power`     | Toggle tv on/off |
+| `/tv/<ip_address>/powerOn`   | Turn tv on       |
+| `/tv/<ip_address>/powerOff`  | Turn tv off      |
 | `/tv/<ip_address>/menu`      | Show menu        |
 | `/tv/<ip_address>/3d`        | Show 3D settings |
 | `/tv/<ip_address>/ok`        | OK button        |

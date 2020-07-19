@@ -9,6 +9,25 @@
       sendRequest(req.params.ip, 'event', 'X_ScreenState', '', { callback: data => res.end(data) });
     });
 
+    vieraControl.get('/tv/:ip/powerOn', function(req, res) {
+      sendRequest(req.params.ip, 'event', 'X_ScreenState', '', { callback: data => {
+        if (data === 'off') {
+          sendRequest(req.params.ip, 'command', 'X_SendKey', '<X_KeyEvent>NRC_POWER-ONOFF</X_KeyEvent>');
+        }
+      }});
+      res.end();
+    });
+
+    vieraControl.get('/tv/:ip/powerOff', function(req, res) {
+      sendRequest(req.params.ip, 'event', 'X_ScreenState', '', { callback: data => {
+        if (data === 'on') {
+          sendRequest(req.params.ip, 'command', 'X_SendKey', '<X_KeyEvent>NRC_POWER-ONOFF</X_KeyEvent>');
+        }
+      }});
+      res.end();
+    });
+
+
     vieraControl.get('/tv/:ip/power', function(req, res) {
       sendRequest(req.params.ip, 'command', 'X_SendKey', '<X_KeyEvent>NRC_POWER-ONOFF</X_KeyEvent>');
       res.end();
