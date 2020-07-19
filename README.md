@@ -37,6 +37,14 @@ All API calls except `/tv/<ip_address>/action` are GET
 |--------------|-------|------------------|
 | `/tv/<ip_address>/action` |POST   |**action** - code |
 
+#### Query state ####
+
+| URL             |                  |
+|-----------------|------------------|
+| `/tv/<ip_address>/state`        | Get volume and power state (JSON) |
+| `/tv/<ip_address>/power/state`  | Get power state            |
+| `/tv/<ip_address>/volume`       | Get volume                 |
+
 #### Basic commands: ####
 
 | URL             |                  |
@@ -75,7 +83,6 @@ All API calls except `/tv/<ip_address>/action` are GET
 
 | URL                         |            |
 |-----------------------------|------------|
-| `/tv/<ip_address>/volume`                | Get volume |
 | `/tv/<ip_address>/volume/<volume>`       | Set volume |
 | `/tv/<ip_address>/volume/plus`           | Volume +1  |
 | `/tv/<ip_address>/volume/minus`          | Volume -1  |
